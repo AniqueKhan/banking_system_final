@@ -1,0 +1,229 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row mt-2" style="width: 100%">
+  <div class="col">
+    <!-- prettier-ignore -->
+    {% if not pending_loans and not due_loans and not paid_loans and not rejected_loans %}
+    <h1 class="mt-4">You dont have any loans as of now</h1>
+    {% else %}
+    <h1
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      My Loans
+    </h1>
+    {% endif %} {% if pending_loans %}
+    <h4
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      Pending Loans
+    </h4>
+    {% for loan in pending_loans %}
+    <div
+      class="card mt-2"
+      style="
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.95rem;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+        margin-right: 150px;
+        margin-left: 150px;
+      "
+    >
+      <div class="card-body">
+        <h5
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          Amount: &#8377;{{loan.amount}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Loan Type: {{loan.get_loan_type_display}}
+        </h6>
+        <p class="card-text">
+          <b>Bank Branch</b>: {{loan.branch}} <br /><b>Taken At</b>:
+          {{loan.created_at}} <br />
+          <b>Due Date</b>: {{loan.due_at}} <br /><b>Loan Status</b>:
+          {{loan.loan_status}} <br />
+
+          {% if loan.get_loan_amount_term %}
+
+          <b>Loan Amount Term</b>: {{loan.get_loan_amount_term}} <br />
+
+          {% endif %}
+        </p>
+        {% if loan.get_pay_loan_button %}
+        <button
+          type="button"
+          class="btn btn-outline-primary float-end"
+          data-toggle="modal"
+          data-target="#addBalanceModal"
+        >
+          Pay Off Loan
+        </button>
+        <!-- Add balance modal -->
+        <div
+          class="modal fade"
+          id="addBalanceModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="addBalanceModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addBalanceModalLabel">
+                  Add Balance
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to pay off this loan?
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <a class="btn btn-primary" href="{% url 'pay-loan' loan.pk %}">
+                  Yes , I am sure.
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %} {% endif %} {% if due_loans %}
+    <h4
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      Due Loans
+    </h4>
+    {% for loan in due_loans %}
+    <div
+      class="card mt-2"
+      style="
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.95rem;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+        margin-right: 150px;
+        margin-left: 150px;
+      "
+    >
+      <div class="card-body">
+        <h5
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          Amount: &#8377;{{loan.amount}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Loan Type: {{loan.get_loan_type_display}}
+        </h6>
+        <p class="card-text">
+          <b>Bank Branch</b>: {{loan.branch}} <br /><b>Taken At</b>:
+          {{loan.created_at}} <br />
+          <b>Due Date</b>:
+          <span style="color: red; font-weight: bold">{{loan.due_at}}</span
+          ><b>Loan Status</b>: {{loan.loan_status}} <br />
+          <br />
+        </p>
+      </div>
+    </div>
+    <br />
+    {% endfor %} {% endif %}{% if paid_loans %}
+    <h4
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      Paid Loans
+    </h4>
+    {% for loan in paid_loans %}
+    <div
+      class="card mt-2"
+      style="
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.95rem;
+        margin-right: 150px;
+        margin-left: 150px;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+      "
+    >
+      <div class="card-body">
+        <h5
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          Amount: &#8377;{{loan.amount}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Loan Type: {{loan.get_loan_type_display}}
+        </h6>
+        <p class="card-text">
+          <b>Bank Branch</b>: {{loan.branch}} <br /><b>Taken At</b>:
+          {{loan.created_at}} <br /><b>Paid At</b>: {{loan.paid_at}}
+          <br />
+          <b>Loan Amount Term</b>: {{loan.get_loan_amount_term}} (days)
+          <br />
+          <b>Loan Status</b>: {{loan.loan_status}} <br />
+        </p>
+      </div>
+    </div>
+    {% endfor %} {% endif %} {% if rejected_loans %}
+    <h4
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      Rejected Loans
+    </h4>
+    {% for loan in rejected_loans %}
+
+    <div
+      class="card mt-2"
+      style="
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.95rem;
+        margin-right: 150px;
+        margin-left: 150px;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+      "
+    >
+      <div class="card-body">
+        <h5
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          Amount: &#8377;{{loan.amount}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Loan Type: {{loan.get_loan_type_display}}
+        </h6>
+        <p class="card-text">
+          <b>Bank Branch</b>: {{loan.branch}} <br /><b>Taken At</b>:
+          {{loan.created_at}}
+          <br />
+          <b>Loan Status</b>: {{loan.loan_status}} <br />
+        </p>
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</div>
+{% endblock content %}

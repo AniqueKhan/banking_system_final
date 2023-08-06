@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row mt-2" style="width: 100%">
+  {% comment %}
+  <div class="row justify-content-center mt-2">
+    {% endcomment %}
+    <div class="col">
+      {% comment %}
+      <div class="col col-md-8">
+        {% endcomment %} {% if not notifications %}
+        <h1>You dont have any notifications as of yet.</h1>
+        {% else %}
+
+        <h1
+          class="mt-2 alert alert-primary"
+          style="margin-right: 150px; margin-left: 150px"
+        >
+          Notifications
+        </h1>
+        {% for notification in notifications %} {% comment %}
+        <div class="card mt-2">
+          <div class="card-body">
+            <h5 class="card-title">{{notification.message}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{notification.date}}</h6>
+            <a
+              class="btn btn-outline-danger float-end"
+              href="{% url 'delete-notification' notification.id %}"
+            >
+              Delete Notification
+            </a>
+          </div>
+        </div>
+        {% endcomment %}
+        <div
+          class="card mt-2"
+          style="
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 0.95rem;
+            box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+            margin-right: 150px;
+            margin-left: 150px;
+          "
+        >
+          <div class="card-body">
+            <h5
+              class="card-title"
+              style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+            >
+              {{notification.message}}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{notification.date}}</h6>
+            <a
+              class="btn btn-outline-danger float-end"
+              href="{% url 'delete-notification' notification.id %}"
+            >
+              Delete Notification
+            </a>
+          </div>
+        </div>
+
+        {% endfor %}{% endif %}
+      </div>
+    </div>
+    {% endblock content %}
+  </div>
+</div>

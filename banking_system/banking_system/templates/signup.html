@@ -1,0 +1,137 @@
+signup.html {% load static widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'signup.css' %}" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <div class="sidenav">
+      <div class="login-main-text">
+        <h2>
+          Banking System<br />
+          Signup Page
+        </h2>
+        <p>Open your own bank account!</p>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+          <form method="post" action="" role="form">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="form-label">Account Name*:</label>
+              {{form.account_name|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">PAN Number*:</label>
+              {{form.pan_number|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone:</label>
+              {{form.phone|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email:</label>
+              {{form.email|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Address:</label>
+              {{form.address|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account Type*:</label>
+              {{form.account_type|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Balance:</label>
+              {{form.balance|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Branch*:</label>
+              {{form.branch|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Education:</label>
+              {{form.education|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Gender:</label>
+              {{form.gender|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Dependents:</label>
+              {{form.dependents|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Self Employed:</label>
+              {{form.self_employed|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Applicant Income*:</label>
+              {{form.applicant_income|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Co-Applicant Income:</label>
+              <!-- prettier-ignore -->
+              {{form.co_applicant_income|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Property Area:</label>
+              {{form.property_area|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Married:</label>
+              {{form.married|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label>Password*:</label>
+              {{form.password|add_class:'form-control form-control-sm'}}
+            </div>
+            <div class="form-group">
+              <label>Confirm Password*:</label>
+              {{form.confirm_password|add_class:'form-control form-control-sm'}}
+            </div>
+            <button type="submit" class="btn btn-black">
+              Create Bank Account
+            </button>
+          </form>
+          {% if form.errors %}
+          <div class="row">
+            <div class="col s12">
+              <span style="color: red; font-weight: bold"
+                >{{ form.errors }}</span
+              >
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

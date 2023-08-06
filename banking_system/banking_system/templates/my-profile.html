@@ -1,0 +1,130 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row mt-2" style="width: 100%">
+  <div class="col">
+    <h1
+      class="alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      My Profile
+    </h1>
+
+    <div
+      class="card mt-2"
+      style="
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.95rem;
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+        margin-left: 150px;
+        margin-right: 150px;
+      "
+    >
+      <div class="card-body">
+        <h5
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          Account Name: {{profile.account_name}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          PAN Number: {{profile.pan_number}}
+        </h6>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Account Type: {{account.get_account_type_display}}
+        </h6>
+        <p class="card-text">
+          <!-- prettier-ignore -->
+          {% if profile.phone %} <b>Phone</b> : {{profile.phone}}
+          <br /><!-- prettier-ignore -->{% endif %} {% if profile.address %}
+          <b>Address</b> : {{profile.address}} <br />{% endif %}
+
+          <b>Balance</b> : &#8377;{{account.balance}} <br />
+          <b>Bank Branch</b> : {{account.branch}} <br />
+          <b>Gender</b> : {{user.get_gender_display}} <br />
+          <b>Education</b> : {{user.get_education_display}} <br />
+          <b>Dependents</b> : {{user.get_dependents_display}} <br />
+          <b>Self-Employed</b> : {{user.get_self_employed_display}} <br />
+          <b>Married</b> : {{user.get_married_display}} <br />
+          <b>Property Area</b> : {{user.get_property_area_display}} <br />
+          <b>Income</b> : &#8377;{{user.applicant_income}} <br />
+
+          {% if user.co_applicant_income %}
+
+          <b>Co-Applicant Income</b> : &#8377;{{user.co_applicant_income}}
+          <br /><!-- prettier-ignore -->{% endif %}
+        </p>
+        <button
+          type="button"
+          class="btn btn-outline-primary float-end"
+          data-toggle="modal"
+          data-target="#addBalanceModal"
+        >
+          Add Balance
+        </button>
+        <!-- Add balance modal -->
+        <div
+          class="modal fade"
+          id="addBalanceModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="addBalanceModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addBalanceModalLabel">
+                  Add Balance
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form
+                  method="post"
+                  id="addBalanceForm"
+                  action="{% url 'add-balance' %}"
+                >
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="amount"
+                      name="amount"
+                      required
+                    />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  form="addBalanceForm"
+                  class="btn btn-primary"
+                >
+                  Add Balance
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

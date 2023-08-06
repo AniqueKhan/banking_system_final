@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row mt-2" style="width: 100%">
+  <div class="col">
+    <div
+      class="card mt-2"
+      style="background-color: #{{bg_color}};
+      border: 1px solid #dee2e6;
+      border-radius: 0.95rem;
+      margin-right: 150px;
+      margin-left: 150px;
+      box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+    "
+    >
+      <div class="card-body">
+        <h3
+          class="card-title"
+          style="color: #007bff; font-size: 1.25rem; font-weight: bold"
+        >
+          {% if approved %} Congratulation! The request for loan has been
+          approved! {% else %} Whoops! The request for loan was rejected!
+          <!-- prettier-ignore -->
+          {% endif %}
+        </h3>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Loan Type: {{loan.get_loan_type_display}}
+        </h6>
+        <p class="card-text">
+          <b>Bank Branch</b>: {{loan.branch}} <br /><b>Taken At</b>:
+          {{loan.created_at}} <br />
+          <b>Due Date</b>: {{loan.due_at}} <br /><b>Loan Amount</b>:
+          &#8377;{{loan.amount}} <br /><b>Loan Status</b>: {{loan.loan_status}}
+          <br />
+
+          {% if loan.get_loan_amount_term %}
+
+          <b>Loan Amount Term</b>: {{loan.get_loan_amount_term}} <br />
+
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
