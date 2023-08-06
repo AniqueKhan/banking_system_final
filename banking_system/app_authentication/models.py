@@ -38,7 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     self_employed = models.CharField(max_length=3, choices=SELF_EMPLOYED_MARRIAGE_CHOICES,default=SELF_EMPLOYED_MARRIAGE_CHOICES[0])
     married = models.CharField(max_length=3, choices=SELF_EMPLOYED_MARRIAGE_CHOICES,default=SELF_EMPLOYED_MARRIAGE_CHOICES[0])
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES,default=GENDER_CHOICES[0])
-    dependents = models.IntegerField(choices=DEPENDENTS_CHOICES,default=DEPENDENTS_CHOICES[0])
+    dependents = models.IntegerField(choices=DEPENDENTS_CHOICES,default=DEPENDENTS_CHOICES[0][0])
     education = models.CharField(max_length=13, choices=EDUCATION_CHOICES,default=EDUCATION_CHOICES[0])
     applicant_income = models.FloatField()
     co_applicant_income = models.FloatField(blank=True,null=True)
@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank=True,null=True)
     
     USERNAME_FIELD = 'account_name'
-    REQUIRED_FIELDS = ['pan_number',]
+    REQUIRED_FIELDS = ['pan_number','applicant_income']
 
     objects = UserManager()
 
