@@ -14,15 +14,15 @@ warnings.simplefilter(action='ignore', category=UserWarning)
 
 # Create your views here.
 
-@login_required
-def index(request):
-    transactions_sent = Transaction.objects.filter(sent_by__hold_by=request.user).order_by("-timestamp")
-    transactions_received = Transaction.objects.filter(sent_to__hold_by=request.user).order_by("-timestamp")
-    context ={
-        "transactions_sent":transactions_sent,
-        "transactions_received":transactions_received,
-    }
-    return render(request, "index.html",context)
+# @login_required
+# def index(request):
+#     transactions_sent = Transaction.objects.filter(sent_by__hold_by=request.user).order_by("-timestamp")
+#     transactions_received = Transaction.objects.filter(sent_to__hold_by=request.user).order_by("-timestamp")
+#     context ={
+#         "transactions_sent":transactions_sent,
+#         "transactions_received":transactions_received,
+#     }
+#     return render(request, "index.html",context)
 
 def branches(request):
     branches = Branch.objects.all()
@@ -162,8 +162,6 @@ def loan_request(request):
             Loan_Amount_Term = form.cleaned_data['loan_amount_term']
             Credit_History = 1 if len(user_due_loans)==0 else 0
             Property_Area = user.get_property_area_display()
-            print(Dependents,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,
-                   Credit_History,Gender, Married, Education, Self_Employed, Property_Area)
 
             prediction = preprocessdata(Dependents,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,
                    Credit_History,Gender, Married, Education, Self_Employed, Property_Area)

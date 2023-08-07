@@ -58,7 +58,7 @@ def signup(request):
 
             account.save()
             login(request, user)
-            return redirect("index")
+            return redirect("loans")
 
 
     else:
@@ -81,7 +81,7 @@ def login_view(request):
                 form.add_error(None, 'Invalid login credentials')
             else:
                 login(request,queryset[0])
-                return redirect('index')
+                return redirect('loans')
             
     else:
         form = LoginForm()

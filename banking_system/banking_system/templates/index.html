@@ -4,7 +4,13 @@
   <div class="col">
     <!-- prettier-ignore -->
     {% if not transactions_received and not transactions_sent %}
-    <h1 class="mt-2">You dont have any transactions as of yet!</h1>
+    <h1
+      class="mt-2 alert alert-primary"
+      style="margin-right: 150px; margin-left: 150px"
+    >
+      You don't have any transactions yet!
+    </h1>
+    
     {% endif %} {% if transactions_sent %}
     <h1
       class="alert alert-primary"

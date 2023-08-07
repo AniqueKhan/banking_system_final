@@ -38,9 +38,9 @@
       </label>
       <label class="logo">Banking System</label>
       <ul>
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'branches' %}">Branches</a></li>
+        {% comment %} <li><a href="{% url 'index' %}">Home</a></li> {% endcomment %}
         <li><a href="{% url 'loans' %}">Loans</a></li>
+        <li><a href="{% url 'branches' %}">Branches</a></li>
         <li><a href="{% url 'loan-request' %}">Request Loan</a></li>
         <li>
           <a href="{% url 'notifications' %}"
