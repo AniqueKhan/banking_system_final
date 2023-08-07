@@ -27,7 +27,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["aniquekhanbankingsystem.pythonanywhere.com","localhost"]
 
 
 # Application definition
@@ -132,10 +132,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'banking_system/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'banking_system/static_root')
-
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Login
 LOGIN_REDIRECT_URL = 'loans'
