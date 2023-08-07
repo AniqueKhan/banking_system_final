@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6cf6x%dl66c(lg&6o$&z^mwu3g&+!m6i1m^5)348rzun0o+y&(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["aniquekhanbankingsystem.pythonanywhere.com","localhost"]
 
 
 # Application definition
@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'banking_system/static')
 ]
-
+STATIC_ROOT = os.path.join(BASE_DIR,'banking_system/static_root')
 
 # Login
 LOGIN_REDIRECT_URL = 'index'
