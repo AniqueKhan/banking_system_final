@@ -27,7 +27,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["aniquekhanbankingsystem.pythonanywhere.com","localhost"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -139,9 +139,9 @@ LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'authentication/login'
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = env("EMAIL_BACKEND") 
+EMAIL_HOST = env("EMAIL_HOST") 
 EMAIL_HOST_USER = env("EMAIL_HOST_USER") 
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_USE_TLS = env("EMAIL_USE_TLS") 
+EMAIL_PORT = env("EMAIL_PORT") 
