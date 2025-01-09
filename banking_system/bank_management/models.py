@@ -152,8 +152,8 @@ def create_notification_on_loan_creation(sender, instance, created, **kwargs):
         
         Notification.objects.create(loan=loan, user=user, message=message)
 
-        if user.email:
-            send_mail(subject=email_subject, message=message, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
+        # if user.email:
+        #     send_mail(subject=email_subject, message=message, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
 
 post_save.connect(create_notification_on_loan_creation, sender=Loan)
 
@@ -165,5 +165,5 @@ def create_notification_on_loan_payment(sender,instance,created,**kwargs):
         Notification.objects.create(loan=loan,user=user,message=message)
         if user.email:
             email_subject = "Loan Payed Off!"
-            send_mail(subject=email_subject, message=message, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
+            # send_mail(subject=email_subject, message=message, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
 post_save.connect(create_notification_on_loan_payment, sender=Loan)
